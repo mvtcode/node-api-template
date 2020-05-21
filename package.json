@@ -32,7 +32,7 @@
 		"jsonwebtoken": "8.4.0",
 		"method-override": "3.0.0",
 		"moment": "2.22.2",
-		"mongoose": "5.3.14",
+		"mongoose": "5.7.5",
 		"morgan": "1.9.1",
 		"mustache": "3.0.1",
 		"querystring": "^0.2.0",
