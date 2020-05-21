@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  webserver:
+    build: .
+    volumes:
+    - ./package.json:/usr/app/package.json
+    - ./.babelrc:/usr/app/.babelrc
+    - ./config:/usr/app/config
+    - ./src:/usr/app/src
+    tty: true
+    depends_on:
+    - mongodb
+    - redis
+    environment:
+      NODE_ENV: development
+    networks:
+      local_dev:
+        ipv4_address: 192.168.100.10
+    
+  mongodb:
+    image: mongo:4.2.6-bionic
+    container_name: mongodb_dev
+    hostname: mongodb_dev
+    tty: true
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+    - ./config/initDb.js:/var/data/initDb.js
+    - mongo_data:/data/db
+    - mongo_log:/var/log/mongodb
+    networks:
+      local_dev:
+        ipv4_address: 192.168.100.20
+
+  redis:
+    image: redis:6.0.3-alpine
+    hostname: redis_dev
+    container_name: redis_dev
+    tty: true
+    command: redis-server --requirepass 123456
+    networks:
+      local_dev:
+        ipv4_address: 192.168.100.30
+
+volumes:
+  mongo_data:
+  mongo_log:
+
+networks:
+  local_dev:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 192.168.100.0/24
