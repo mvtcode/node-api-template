@@ -31,7 +31,7 @@
 		"joi-phone-number": "4.1.0",
 		"jsonwebtoken": "8.5.1",
 		"method-override": "3.0.0",
-		"moment": "2.26.0",
+		"moment": "2.29.2",
 		"mongoose": "^5.9.15",
 		"morgan": "1.10.0",
 		"mustache": "4.0.1",
